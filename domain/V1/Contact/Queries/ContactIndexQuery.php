@@ -11,9 +11,9 @@ class ContactIndexQuery
      * Fetch data based on parameters.
      *
      * @param  array<string, mixed>  $params  Parameters for fetching data.
-     * @return Collection|array The fetched object, or null if not found.
+     * @return \Illuminate\Contracts\Pagination\CursorPaginator The fetched object, or null if not found.
      */
-    public function fetch(array $params): Collection|array
+    public function fetch(array $params): \Illuminate\Contracts\Pagination\CursorPaginator
     {
         return Contact::query()
             ->select([
@@ -27,6 +27,6 @@ class ContactIndexQuery
                 'updated_at',
             ])
             ->orderBy('created_at')
-            ->get();
+            ->cursorPaginate();
     }
 }
